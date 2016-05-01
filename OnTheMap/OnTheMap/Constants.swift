@@ -10,6 +10,8 @@ import Foundation
 
 struct Constants {
     // LoginViewController constants
+    static let emailEmptyMessage = "Please enter an Email Address"
+    static let passwordEmptyMessage = "Please enter a Password"
     
     // TabBarViewController constants
     

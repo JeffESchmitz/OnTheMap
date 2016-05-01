@@ -55,6 +55,9 @@
                                         <state key="normal" title="Login">
                                             <color key="titleColor" red="0.0078431372550000003" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="udacityLoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uXL-aF-Rzr"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" placeholderIntrinsicWidth="46" placeholderIntrinsicHeight="30" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fyI-fp-g5S">
                                         <rect key="frame" x="0.0" y="196" width="250" height="40"/>
@@ -80,6 +83,13 @@
                             <constraint firstItem="109-Hf-Rci" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fcc-iI-6QI"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="accountSignUpButton" destination="fyI-fp-g5S" id="Mpm-W3-hL5"/>
+                        <outlet property="emailTextField" destination="M1B-hy-But" id="q0M-DK-pr4"/>
+                        <outlet property="facebookLoginButton" destination="109-Hf-Rci" id="TvT-OB-JT4"/>
+                        <outlet property="passwordTextField" destination="Yw9-9j-P4L" id="mwU-6p-nhj"/>
+                        <outlet property="udacityLoginButton" destination="8Lk-mF-2Sy" id="oyw-Jo-drO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
