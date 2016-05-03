@@ -39,6 +39,11 @@ class LoginViewController: UIViewController {
             showAlert(Constants.passwordEmptyMessage)
             return
         }
+        
+        dispatch_async(dispatch_get_main_queue()) { 
+            let rootNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("RootNavigationController") as! UINavigationController
+            self.presentViewController(rootNavigationController, animated: true, completion: nil)
+        }
     }
     
     

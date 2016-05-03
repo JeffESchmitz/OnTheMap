@@ -23,6 +23,7 @@
 		958E38711CD531F100520BCC /* LocationsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38701CD531F100520BCC /* LocationsMapViewController.swift */; };
 		958E38731CD535AD00520BCC /* LocationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38721CD535AD00520BCC /* LocationsTableViewController.swift */; };
 		958E38751CD53AB400520BCC /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38741CD53AB400520BCC /* InformationPostingViewController.swift */; };
+		958E38771CD7746100520BCC /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38761CD7746100520BCC /* UserLogin.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		958E38701CD531F100520BCC /* LocationsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsMapViewController.swift; sourceTree = "<group>"; };
 		958E38721CD535AD00520BCC /* LocationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsTableViewController.swift; sourceTree = "<group>"; };
 		958E38741CD53AB400520BCC /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
+		958E38761CD7746100520BCC /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +116,7 @@
 				958E38611CD5220200520BCC /* Clients */,
 				958E385D1CD4FE4800520BCC /* StudentInformation.swift */,
 				958E385F1CD4FFF500520BCC /* StudentInformationService.swift */,
+				958E38761CD7746100520BCC /* UserLogin.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 				958E38731CD535AD00520BCC /* LocationsTableViewController.swift in Sources */,
 				958E38711CD531F100520BCC /* LocationsMapViewController.swift in Sources */,
 				958E386F1CD5319A00520BCC /* TabBarViewController.swift in Sources */,
+				958E38771CD7746100520BCC /* UserLogin.swift in Sources */,
 				958E386B1CD52C0100520BCC /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
