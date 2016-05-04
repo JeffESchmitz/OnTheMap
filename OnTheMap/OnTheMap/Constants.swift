@@ -30,7 +30,7 @@ struct Constants {
     struct HttpRequest {
         static let MethodPOST           = "POST"
         static let AcceptHeaderField    = "Accept"
-        static let ContentTypeHeaderField    = "Accept"
+        static let ContentTypeHeaderField    = "Content-Type"
         static let ContentJSON          = "application/json"
         
     }
@@ -40,9 +40,9 @@ struct Constants {
         static let Error: String = "error"
         static let Account: String = "account"
         static let Registered: String = "registered"
-        static let Key: String = "key"
         static let Session: String = "session"
         static let Id: String = "id"
+        static let Key: String = "key"
         
         
         struct Methods {

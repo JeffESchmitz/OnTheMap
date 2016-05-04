@@ -9,11 +9,11 @@
 import Foundation
 
 struct UserLogin {
-    static var accountKey: String?
-    static var sessionId: String?
-    static var userFirstName: String?
-    static var userLastName: String?
-    static var loginType: LoginType?
+    var accountKey: String?
+    var sessionId: String?
+    var userFirstName: String?
+    var userLastName: String?
+    var loginType: LoginType?
 }
 
 enum LoginType {

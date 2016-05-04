@@ -25,29 +25,48 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // code here...
+        // just for debugging
+        if _isDebugAssertConfiguration() {
+            emailTextField.text = "jeffeschmitz@gmail.com"
+            passwordTextField.text = "PZ2-Lo2-mTA-KcE"
+        }
     }
 
     
     @IBAction func udacityLoginButtonTapped(sender: AnyObject) {
-        if emailTextField.text!.isEmpty {
+        guard !emailTextField.text!.isEmpty,
+            let userName = emailTextField.text else {
             showAlert(Constants.emailEmptyMessage)
             return
         }
         
-        if passwordTextField.text!.isEmpty {
+        guard !passwordTextField.text!.isEmpty,
+            let password = passwordTextField.text else {
             showAlert(Constants.passwordEmptyMessage)
             return
         }
         
+        Client.sharedInstance.udacityLogin(userName, password: password) { (result, error) in
+            self.login(LoginType.Udacity, result: result, error: "")
+        }
+        
+        
+        //TODO: Need to evaluate something here to determine if to navigate to Tab Controller or flash "Not Logged In" alert to user
         dispatch_async(dispatch_get_main_queue()) { 
             let rootNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("RootNavigationController") as! UINavigationController
             self.presentViewController(rootNavigationController, animated: true, completion: nil)
         }
     }
     
-    
+    private func login(loginType: LoginType, result: AnyObject, error: String) {
+        
+        Client.sharedInstance.userLoginType = .Udacity
+        
+        
+        
+    }
 }
+
 extension LoginViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(textField: UITextField) -> Bool {

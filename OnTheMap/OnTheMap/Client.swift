@@ -13,25 +13,32 @@ class Client {
     static let sharedInstance = Client()
     private init(){
         session = NSURLSession.sharedSession()
+        userLogin = UserLogin()
     }
     
     var session: NSURLSession
+    var userLoginType: LoginType?
+    var userLogin: UserLogin
+    
     
     func taskForPOSTMethod(urlString: String,
                            jsonBody: [String: AnyObject],
                            completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        
+
         guard let url = NSURL(string: urlString) else {
             print("url failed to initialize with '\(urlString)'")
             return
         }
         
         let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = Constants.HttpRequest.MethodPOST
+        request.HTTPMethod = "POST"
         request.addValue(Constants.HttpRequest.ContentJSON, forHTTPHeaderField: Constants.HttpRequest.AcceptHeaderField)
         request.addValue(Constants.HttpRequest.ContentJSON, forHTTPHeaderField: Constants.HttpRequest.ContentTypeHeaderField)
         do {
-            request.HTTPBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
+            print("jsonBody: \(jsonBody)")
+            let requestBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
+            print("HTTPBody: '\(requestBody)'")
+            request.HTTPBody = requestBody
         }
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
@@ -43,14 +50,14 @@ class Client {
                 return
             }
             
-            // check what status code returned
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode == 403 else {
-                completionHandler(result: nil, error: NSError(domain: #function, code: 2, userInfo: [NSLocalizedDescriptionKey : "Invalid email or password"]))
+            // check status code returned
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode else {
+                completionHandler(result: nil, error: NSError(domain: #function, code: 2, userInfo: [NSLocalizedDescriptionKey : "no status code returned from Udactiy server"]))
                 return
             }
-            
-            guard let _ = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
-                completionHandler(result: nil, error: NSError(domain: #function, code: 2, userInfo: [NSLocalizedDescriptionKey : "Your request returned an invalid status code other than 2xx!"]))
+            if statusCode < 200 || statusCode > 299 {
+                print("statusCode: \(statusCode)")
+                completionHandler(result: nil, error: NSError(domain: #function, code: statusCode, userInfo: [NSLocalizedDescriptionKey : "Invalid email or password"]))
                 return
             }
             
