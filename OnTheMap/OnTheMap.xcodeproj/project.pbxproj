@@ -24,6 +24,7 @@
 		958E38731CD535AD00520BCC /* LocationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38721CD535AD00520BCC /* LocationsTableViewController.swift */; };
 		958E38751CD53AB400520BCC /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38741CD53AB400520BCC /* InformationPostingViewController.swift */; };
 		958E38771CD7746100520BCC /* UserLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38761CD7746100520BCC /* UserLogin.swift */; };
+		F0F0D2C4026AB7476567422A /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F0D2B0933E49B3A3F292EB /* ActivityViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		958E38721CD535AD00520BCC /* LocationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsTableViewController.swift; sourceTree = "<group>"; };
 		958E38741CD53AB400520BCC /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
 		958E38761CD7746100520BCC /* UserLogin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLogin.swift; sourceTree = "<group>"; };
+		F0F0D2B0933E49B3A3F292EB /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 			children = (
 				958E384A1CD4FC2C00520BCC /* Main.storyboard */,
 				958E384F1CD4FC2C00520BCC /* LaunchScreen.storyboard */,
+				F0F0D2B0933E49B3A3F292EB /* ActivityViewController.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 				958E386F1CD5319A00520BCC /* TabBarViewController.swift in Sources */,
 				958E38771CD7746100520BCC /* UserLogin.swift in Sources */,
 				958E386B1CD52C0100520BCC /* Constants.swift in Sources */,
+				F0F0D2C4026AB7476567422A /* ActivityViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

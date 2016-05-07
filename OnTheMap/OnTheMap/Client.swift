@@ -9,7 +9,7 @@
 import Foundation
 
 class Client {
-
+    
     static let sharedInstance = Client()
     private init(){
         session = NSURLSession.sharedSession()
@@ -17,14 +17,13 @@ class Client {
     }
     
     var session: NSURLSession
-    var userLoginType: LoginType?
+//    var userLoginType: LoginType?
     var userLogin: UserLogin
-    
     
     func taskForPOSTMethod(urlString: String,
                            jsonBody: [String: AnyObject],
                            completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-
+        
         guard let url = NSURL(string: urlString) else {
             print("url failed to initialize with '\(urlString)'")
             return
@@ -42,27 +41,28 @@ class Client {
         }
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
-
-            // check for any errors
-            guard error == nil else {
-                let userInfo = [NSLocalizedDescriptionKey : error!]
-                completionHandler(result: nil, error: NSError(domain: #function, code: 1, userInfo: userInfo))
+            
+            func sendError(error: String) {
+                print(error)
+                let userInfo = [NSLocalizedDescriptionKey : error]
+                completionHandler(result: nil, error: NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
+            }
+            
+            // Check for any errors
+            guard (error == nil) else {
+                sendError("There was an error with your request: \(error)")
                 return
             }
             
-            // check status code returned
-            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode else {
-                completionHandler(result: nil, error: NSError(domain: #function, code: 2, userInfo: [NSLocalizedDescriptionKey : "no status code returned from Udactiy server"]))
-                return
-            }
-            if statusCode < 200 || statusCode > 299 {
-                print("statusCode: \(statusCode)")
-                completionHandler(result: nil, error: NSError(domain: #function, code: statusCode, userInfo: [NSLocalizedDescriptionKey : "Invalid email or password"]))
+            // Successful 2XX response?
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                sendError("Your request returned a status code other than 2xx!")
                 return
             }
             
+            // Any data returned?
             guard let data = data else {
-                completionHandler(result: nil, error: NSError(domain: #function, code: 3, userInfo: [NSLocalizedDescriptionKey : "No data returned by the request"]))
+                sendError("No data was returned by the request!")
                 return
             }
             
@@ -76,7 +76,69 @@ class Client {
             self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandler)
         }
         task.resume()
-     }
+    }
+    
+    func taskForGETMethod(urlString: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        
+        func sendError(error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey : error]
+            completionHandler(result: nil, error: NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
+        }
+        
+        // 1. Build the request
+        guard let url = NSURL(string: urlString) else {
+            sendError("Invalid URL or nil")
+            return
+        }
+        let request = NSMutableURLRequest(URL: url)
+        
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+
+            // Check for any errors
+            guard error == nil else {
+                sendError("Error submitting request to the server. request: '\(request)'")
+                return
+            }
+            
+            // Successful 2XX response?
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                sendError("Your request returned a status code other than 2xx!")
+                return
+            }
+            
+            // Any data returned?
+            guard let data = data else {
+                sendError("No data was returned by the request!")
+                return
+            }
+            
+            // Udactiy API Special Note!
+            // "FOR ALL RESPONSES FROM THE UDACITY API, YOU WILL NEED TO SKIP THE FIRST 5 CHARACTERS OF THE RESPONSE."
+            var newData = data
+            if urlString.containsString("udacity.com") {
+                newData = data.subdataWithRange(NSMakeRange(5, (data.length) - 5))
+            }
+
+            // 3. Parse and use the data in completionHandler
+            self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandler)
+            
+        }
+        // 2. Submit the request
+        task.resume()
+
+        
+//        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/3903878747")!)
+//        let session = NSURLSession.sharedSession()
+//        let task = session.dataTaskWithRequest(request) { data, response, error in
+//            if error != nil { // Handle error...
+//                return
+//            }
+//            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
+//            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
+//        }
+//        task.resume()
+    }
     
     
     // given raw JSON, return a usable Foundation object
@@ -92,5 +154,5 @@ class Client {
         
         completionHandlerForConvertData(result: parsedResult, error: nil)
     }
-
+    
 }

@@ -20,7 +20,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var udacityLoginButton: UIButton!
     @IBOutlet weak var accountSignUpButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
-    
+    private let activityViewController = ActivityViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,25 +46,44 @@ class LoginViewController: UIViewController {
             return
         }
         
+        activityViewController.displayMessage = "Connecting..."
+        presentViewController(activityViewController, animated: true, completion: nil)
+        
+        Client.sharedInstance.userLogin.loginType = LoginType.Udacity
         Client.sharedInstance.udacityLogin(userName, password: password) { (result, error) in
-            self.login(LoginType.Udacity, result: result, error: "")
+            dispatch_async(dispatch_get_main_queue(), { 
+                if let status = result as? Bool where status {
+                    self.completeLogin()
+                } else {
+                    self.displayError(error)
+                }
+            })
         }
         
-        
-        //TODO: Need to evaluate something here to determine if to navigate to Tab Controller or flash "Not Logged In" alert to user
-        dispatch_async(dispatch_get_main_queue()) { 
-            let rootNavigationController = self.storyboard?.instantiateViewControllerWithIdentifier("RootNavigationController") as! UINavigationController
-            self.presentViewController(rootNavigationController, animated: true, completion: nil)
-        }
     }
     
-    private func login(loginType: LoginType, result: AnyObject, error: String) {
+    private func completeLogin() {
         
-        Client.sharedInstance.userLoginType = .Udacity
-        
-        
-        
+        dispatch_async(dispatch_get_main_queue(), {
+            self.emailTextField.text = ""
+            self.passwordTextField.text = ""
+
+            self.activityViewController.dismissActivity()
+
+            // Navigate to the TabBarController
+            let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("RootNavigationController") as! UINavigationController
+            self.presentViewController(tabBarController, animated: true, completion: nil)
+        })
     }
+    
+    private func displayError(message: String? = "") {
+        dispatch_async(dispatch_get_main_queue()) { 
+            let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+        }
+    }
+
 }
 
 extension LoginViewController: UITextFieldDelegate {

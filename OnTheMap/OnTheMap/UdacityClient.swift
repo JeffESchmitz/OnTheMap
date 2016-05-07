@@ -11,7 +11,7 @@ import Foundation
 // Extends the Client class with specific functionality and data related to the Udacity API
 extension Client {
     
-    func udacityLogin(username: String, password: String, completionHandler: (result: AnyObject, error: String?) -> Void) {
+    func udacityLogin(username: String, password: String, completionHandler: (result: AnyObject!, error: String?) -> Void) {
         
         let url = Constants.UdacityAPI.BaseUrl + Constants.UdacityAPI.Methods.Session
         print("url: \(url)")
@@ -48,6 +48,30 @@ extension Client {
                 // store session id for later
                 self.userLogin.sessionId = session[Constants.UdacityAPI.Id] as? String
                 
+                self.getUdacityUserData(completionHandler)
+                
+            }
+        }
+    }
+    
+    func getUdacityUserData(completionHandler: (result: AnyObject!, error: String?) -> Void) {
+     
+        let urlString = Constants.UdacityAPI.BaseUrl + Constants.UdacityAPI.Methods.Users + "/" + userLogin.accountKey!
+        print("urlString: \(urlString)")
+    
+        taskForGETMethod(urlString) { (result, error) in
+            if let error = error {
+                print("error: \(error)")
+                completionHandler(result: false, error: error.userInfo.description)
+            } else {
+                guard let user = result[Constants.UdacityAPI.User] as? [String:AnyObject] else {
+                    completionHandler(result: false, error: "Udacity user infor not found!")
+                    return
+                }
+                self.userLogin.userFirstName = user[Constants.UdacityAPI.FirstName] as? String
+                self.userLogin.userLastName = user[Constants.UdacityAPI.LastName] as? String
+                
+                completionHandler(result: true, error: "")
             }
         }
     }
