@@ -39,6 +39,8 @@ struct Constants {
     
     struct UdacityAPI {
         static let BaseUrl                  = "https://www.udacity.com/api"
+        static let SignUpUrl                = "https://www.udacity.com/account/auth#!/signin"
+
         static let URLPathSeparator         = "/"
         static let Error                    = "error"
         static let Account                  = "account"

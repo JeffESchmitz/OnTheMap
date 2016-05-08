@@ -66,6 +66,9 @@
                                         <state key="normal" title="Don't have an account? Sign up">
                                             <color key="titleColor" red="0.0078431372550000003" green="0.70196078429999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="udacitySignUpTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Q3o-mg-dz7"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -10,6 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    private let activityViewController = ActivityViewController()
     
     @IBOutlet weak var emailTextField: UITextField! {
         didSet { emailTextField.delegate = self }
@@ -20,7 +21,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var udacityLoginButton: UIButton!
     @IBOutlet weak var accountSignUpButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
-    private let activityViewController = ActivityViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +31,6 @@ class LoginViewController: UIViewController {
             passwordTextField.text = "PZ2-Lo2-mTA-KcE"
         }
     }
-
     
     @IBAction func udacityLoginButtonTapped(sender: AnyObject) {
         guard !emailTextField.text!.isEmpty,
@@ -63,6 +62,14 @@ class LoginViewController: UIViewController {
         }
         
     }
+    
+    @IBAction func udacitySignUpTapped(sender: AnyObject) {
+        let urlString = Constants.UdacityAPI.SignUpUrl
+        if let url = NSURL(string: urlString) {
+            UIApplication.sharedApplication().openURL(url)
+        }
+    }
+    
     
     private func completeLogin() {
         
