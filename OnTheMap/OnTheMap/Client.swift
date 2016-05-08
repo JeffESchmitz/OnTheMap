@@ -30,7 +30,7 @@ class Client {
         }
         
         let request = NSMutableURLRequest(URL: url)
-        request.HTTPMethod = "POST"
+        request.HTTPMethod = Constants.HttpRequest.MethodPOST
         request.addValue(Constants.HttpRequest.ContentJSON, forHTTPHeaderField: Constants.HttpRequest.AcceptHeaderField)
         request.addValue(Constants.HttpRequest.ContentJSON, forHTTPHeaderField: Constants.HttpRequest.ContentTypeHeaderField)
         do {
@@ -83,7 +83,7 @@ class Client {
         func sendError(error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey : error]
-            completionHandler(result: nil, error: NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
+            completionHandler(result: nil, error: NSError(domain: "taskForGETMethod", code: 2, userInfo: userInfo))
         }
         
         // 1. Build the request
@@ -126,20 +126,66 @@ class Client {
         }
         // 2. Submit the request
         task.resume()
-
-        
-//        let request = NSMutableURLRequest(URL: NSURL(string: "https://www.udacity.com/api/users/3903878747")!)
-//        let session = NSURLSession.sharedSession()
-//        let task = session.dataTaskWithRequest(request) { data, response, error in
-//            if error != nil { // Handle error...
-//                return
-//            }
-//            let newData = data!.subdataWithRange(NSMakeRange(5, data!.length - 5)) /* subset response data! */
-//            print(NSString(data: newData, encoding: NSUTF8StringEncoding))
-//        }
-//        task.resume()
     }
     
+    func taskForDELETEMethod(urlString: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+        print("urlString: \(urlString)")
+        func sendError(error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey : error]
+            completionHandler(result: nil, error: NSError(domain: "taskForDELETEMethod", code: 3, userInfo: userInfo))
+        }
+        
+        // 1. Build the request
+        guard let url = NSURL(string: urlString) else {
+            sendError("Invalid URL or nil")
+            return
+        }
+        let request = NSMutableURLRequest(URL: url)
+        request.HTTPMethod = Constants.HttpRequest.MethodDELETE
+        
+        var xsrfCookie: NSHTTPCookie? = nil
+        let sharedCookieStorage = NSHTTPCookieStorage.sharedHTTPCookieStorage()
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == Constants.HttpRequest.CookieName {
+                xsrfCookie = cookie
+            }
+        }
+
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: Constants.HttpRequest.XSRFHeaderField)
+        }
+        
+        let task = session.dataTaskWithRequest(request) { (data, response, error) in
+            
+            // Check for any errors
+            guard error == nil else {
+                sendError("Error submitting request to the server. request: '\(request)'")
+                return
+            }
+            
+            // Successful 2XX response?
+            guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                sendError("Your request returned a status code other than 2xx!")
+                return
+            }
+            
+            // Any data returned?
+            guard let data = data else {
+                sendError("No data was returned by the request!")
+                return
+            }
+
+            var newData = data
+            if urlString.containsString("udacity.com") {
+                newData = data.subdataWithRange(NSMakeRange(5, (data.length) - 5))
+            }
+            
+            // 3. Parse and use the data in completionHandler
+            self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandler)
+        }
+        task.resume()
+    }
     
     // given raw JSON, return a usable Foundation object
     private func convertDataWithCompletionHandler(data: NSData, completionHandlerForConvertData: (result: AnyObject!, error: NSError?) -> Void) {
@@ -156,3 +202,15 @@ class Client {
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+

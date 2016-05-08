@@ -13,7 +13,7 @@ extension Client {
     
     func udacityLogin(username: String, password: String, completionHandler: (result: AnyObject!, error: String?) -> Void) {
         
-        let url = Constants.UdacityAPI.BaseUrl + Constants.UdacityAPI.Methods.Session
+        let url = Constants.UdacityAPI.BaseUrl + Constants.UdacityAPI.URLPathSeparator + Constants.UdacityAPI.Session
         print("url: \(url)")
         let jsonBody: [String : AnyObject] = ["udacity" : ["username" : username, "password" : password]]
         print("jsonBody: \(jsonBody)")
@@ -22,7 +22,7 @@ extension Client {
             //TODO: JES - 5.1.2016 - refactor below out to common method for FaceBook login to use also
 
             if error != nil {
-                completionHandler(result: false, error: error?.description)
+                completionHandler(result: false, error: error?.valueForKeyPath("userInfo.NSLocalizedDescription") as? String)
             }
             else {
                 guard let account = result[Constants.UdacityAPI.Account] as? [String:AnyObject] else {
@@ -56,13 +56,17 @@ extension Client {
     
     func getUdacityUserData(completionHandler: (result: AnyObject!, error: String?) -> Void) {
      
-        let urlString = Constants.UdacityAPI.BaseUrl + Constants.UdacityAPI.Methods.Users + "/" + userLogin.accountKey!
+        let urlString = Constants.UdacityAPI.BaseUrl
+                        + Constants.UdacityAPI.URLPathSeparator
+                        + Constants.UdacityAPI.Users
+                        + Constants.UdacityAPI.URLPathSeparator
+                        + userLogin.accountKey!
         print("urlString: \(urlString)")
     
         taskForGETMethod(urlString) { (result, error) in
             if let error = error {
                 print("error: \(error)")
-                completionHandler(result: false, error: error.userInfo.description)
+                completionHandler(result: false, error: error.valueForKeyPath("userInfo.NSLocalizedDescription") as? String)
             } else {
                 guard let user = result[Constants.UdacityAPI.User] as? [String:AnyObject] else {
                     completionHandler(result: false, error: "Udacity user infor not found!")
@@ -76,4 +80,47 @@ extension Client {
         }
     }
     
+    func logout(completionHandler: (result: AnyObject!, error: String?) -> Void) {
+        if userLogin.loginType == .Udacity {
+           let urlString = Constants.UdacityAPI.BaseUrl
+                            + Constants.UdacityAPI.URLPathSeparator
+                            + Constants.UdacityAPI.Session
+            print("urlString: \(urlString)")
+            
+            taskForDELETEMethod(urlString, completionHandler: { (result, error) in
+                
+                if error != nil {
+                    completionHandler(result: false, error: error?.valueForKeyPath("userInfo.NSLocalizedDescription") as? String)
+                }
+                else {
+                    guard let _ = result[Constants.UdacityAPI.Session] as? [String:AnyObject] else {
+                        completionHandler(result: false, error: "Logout Failed!")
+                        return
+                    }
+                    completionHandler(result: true, error: nil)
+                }
+            })
+        }
+    }
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

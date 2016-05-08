@@ -55,6 +55,8 @@ class LoginViewController: UIViewController {
                 if let status = result as? Bool where status {
                     self.completeLogin()
                 } else {
+                    self.activityViewController.dismissActivity()
+                    print("error: \(error)")
                     self.displayError(error)
                 }
             })
@@ -76,7 +78,7 @@ class LoginViewController: UIViewController {
         })
     }
     
-    private func displayError(message: String? = "") {
+    private func displayError(message: String! = "") {
         dispatch_async(dispatch_get_main_queue()) { 
             let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.Alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))

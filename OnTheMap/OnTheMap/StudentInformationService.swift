@@ -16,12 +16,12 @@ class StudentInformationService {
     
     var studentPosts = [StudentInformation]()
     
-    func addInformationFromData(studentInformation: [NSDictionary]) {
-        
-    }
-    
-    func removeAll() {
-        
-    }
+//    func addInformationFromData(studentInformation: [NSDictionary]) {
+//        
+//    }
+//    
+//    func removeAll() {
+//        studentPosts.removeAll()
+//    }
     
 }

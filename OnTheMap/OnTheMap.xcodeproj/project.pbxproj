@@ -19,7 +19,7 @@
 		958E38691CD5290800520BCC /* ClientConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38681CD5290800520BCC /* ClientConstants.swift */; };
 		958E386B1CD52C0100520BCC /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E386A1CD52C0100520BCC /* Constants.swift */; };
 		958E386D1CD5301600520BCC /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E386C1CD5301600520BCC /* LoginViewController.swift */; };
-		958E386F1CD5319A00520BCC /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E386E1CD5319A00520BCC /* TabBarViewController.swift */; };
+		958E386F1CD5319A00520BCC /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E386E1CD5319A00520BCC /* TabBarController.swift */; };
 		958E38711CD531F100520BCC /* LocationsMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38701CD531F100520BCC /* LocationsMapViewController.swift */; };
 		958E38731CD535AD00520BCC /* LocationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38721CD535AD00520BCC /* LocationsTableViewController.swift */; };
 		958E38751CD53AB400520BCC /* InformationPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38741CD53AB400520BCC /* InformationPostingViewController.swift */; };
@@ -42,7 +42,7 @@
 		958E38681CD5290800520BCC /* ClientConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientConstants.swift; sourceTree = "<group>"; };
 		958E386A1CD52C0100520BCC /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		958E386C1CD5301600520BCC /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		958E386E1CD5319A00520BCC /* TabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		958E386E1CD5319A00520BCC /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		958E38701CD531F100520BCC /* LocationsMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsMapViewController.swift; sourceTree = "<group>"; };
 		958E38721CD535AD00520BCC /* LocationsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationsTableViewController.swift; sourceTree = "<group>"; };
 		958E38741CD53AB400520BCC /* InformationPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InformationPostingViewController.swift; sourceTree = "<group>"; };
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				958E386C1CD5301600520BCC /* LoginViewController.swift */,
-				958E386E1CD5319A00520BCC /* TabBarViewController.swift */,
+				958E386E1CD5319A00520BCC /* TabBarController.swift */,
 				958E38701CD531F100520BCC /* LocationsMapViewController.swift */,
 				958E38721CD535AD00520BCC /* LocationsTableViewController.swift */,
 				958E38741CD53AB400520BCC /* InformationPostingViewController.swift */,
@@ -217,7 +217,7 @@
 				958E38471CD4FC2C00520BCC /* AppDelegate.swift in Sources */,
 				958E38731CD535AD00520BCC /* LocationsTableViewController.swift in Sources */,
 				958E38711CD531F100520BCC /* LocationsMapViewController.swift in Sources */,
-				958E386F1CD5319A00520BCC /* TabBarViewController.swift in Sources */,
+				958E386F1CD5319A00520BCC /* TabBarController.swift in Sources */,
 				958E38771CD7746100520BCC /* UserLogin.swift in Sources */,
 				958E386B1CD52C0100520BCC /* Constants.swift in Sources */,
 				F0F0D2C4026AB7476567422A /* ActivityViewController.swift in Sources */,
@@ -372,6 +372,7 @@
 				958E38571CD4FC2C00520BCC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -152,14 +152,21 @@
         <!--Tab Bar Controller-->
         <scene sceneID="6HK-XL-l3C">
             <objects>
-                <tabBarController id="Qp2-v8-zIm" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="e8h-cg-4jA"/>
+                <tabBarController id="Qp2-v8-zIm" customClass="TabBarController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="e8h-cg-4jA">
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="gRd-b5-jQf">
+                            <connections>
+                                <action selector="logoutButtonTouched:" destination="Qp2-v8-zIm" id="lwh-8k-TWR"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Lhk-sN-lPH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="logoutButton" destination="gRd-b5-jQf" id="nAe-Kv-9M5"/>
                         <segue destination="xtp-si-eis" kind="relationship" relationship="viewControllers" id="k2u-8L-1uB"/>
                         <segue destination="BPY-zC-RPy" kind="relationship" relationship="viewControllers" id="Emc-Ru-6xD"/>
                     </connections>
