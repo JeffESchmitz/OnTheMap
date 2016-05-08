@@ -98,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="397" y="465"/>
         </scene>
-        <!--Item 2-->
+        <!--Locations Table View-->
         <scene sceneID="Qeb-f2-RCh">
             <objects>
-                <viewController id="BPY-zC-RPy" sceneMemberID="viewController">
+                <viewController title="Locations Table View" id="BPY-zC-RPy" customClass="LocationsTableViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f7R-wX-hat"/>
                         <viewControllerLayoutGuide type="bottom" id="k1w-E2-QTl"/>
@@ -109,18 +109,34 @@
                     <view key="view" contentMode="scaleToFill" id="VuS-rd-IxN">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ceY-ay-qzj">
+                                <rect key="frame" x="0.0" y="64" width="600" height="487"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="ZtJ-hl-WcO">
+                                        <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZtJ-hl-WcO" id="q0d-lK-g9B">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 2" id="FEy-Eb-cBx"/>
+                    <tabBarItem key="tabBarItem" title="List" image="list" selectedImage="list" id="FEy-Eb-cBx"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="j2l-PB-BDi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2779" y="795"/>
         </scene>
-        <!--Item 1-->
+        <!--Locations Map View-->
         <scene sceneID="4zV-iu-85L">
             <objects>
-                <viewController id="xtp-si-eis" sceneMemberID="viewController">
+                <viewController title="Locations Map View" id="xtp-si-eis" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="vf5-Ej-XLY"/>
                         <viewControllerLayoutGuide type="bottom" id="t8w-10-9Fv"/>
@@ -130,7 +146,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="ysN-Nb-WRp"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" selectedImage="map" id="ysN-Nb-WRp"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eUo-hg-0P4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -179,4 +195,8 @@
             <point key="canvasLocation" x="1959" y="465"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="list" width="32" height="32"/>
+        <image name="map" width="32" height="32"/>
+    </resources>
 </document>
