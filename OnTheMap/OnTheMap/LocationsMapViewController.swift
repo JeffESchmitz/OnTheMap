@@ -10,4 +10,8 @@ import UIKit
 
 class LocationsMapViewController: UIViewController {
 
+    
+    func refreshMap() -> Void {
+        
+    }
 }

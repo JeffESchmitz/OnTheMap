@@ -41,6 +41,16 @@ class TabBarController: UITabBarController {
     
     
     @IBAction func refreshButtonTouched(sender: AnyObject) {
-        
+        Client.sharedInstance.getStudentLocations { (result, error) in
+            
+            if let status = result as? Bool where status {
+                if let selectedView = self.selectedViewController as? LocationsTableViewController {
+                    selectedView.refreshTable()
+                }
+                else if let selectedView = self.selectedViewController as? LocationsMapViewController {
+                    selectedView.refreshMap()
+                }
+            }
+        }
     }
 }
