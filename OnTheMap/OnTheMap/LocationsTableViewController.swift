@@ -66,7 +66,17 @@ extension LocationsTableViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        print("didSelectRowAtIndexPath not implemented yet...")
+        let studentInfo = StudentInformationService.sharedInstance.studentPosts[indexPath.row]
+        if var mediaUrl = studentInfo.mediaURL {
+            if !mediaUrl.lowercaseString.hasPrefix("http://") {
+                mediaUrl = "http://" + mediaUrl
+            }
+            if let url = NSURL(string: mediaUrl) {
+                UIApplication.sharedApplication().openURL(url)
+            }
+        } else {
+            self.showAlert("No URL for student: \(studentInfo.firstName!) \(studentInfo.lastName!)")
+        }
     }
     
 }
