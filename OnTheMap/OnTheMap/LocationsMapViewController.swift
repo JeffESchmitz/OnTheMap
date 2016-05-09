@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import MapKit
 
 class LocationsMapViewController: UIViewController {
 
+    @IBOutlet weak var mapView: MKMapView!
     
     func refreshMap() -> Void {
         
