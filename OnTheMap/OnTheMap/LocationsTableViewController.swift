@@ -16,9 +16,9 @@ class LocationsTableViewController: UIViewController {
         super.viewDidLoad()
         
 
-        // Bit of a hack (but works) fix to remove the trailing empty cells from the UITableView - http://stackoverflow.com/questions/28708574/how-to-remove-extra-empty-cells-in-tableviewcontroller-ios-swift
-        tableView.tableFooterView = UIView()
-        
+//        // Bit of a hack (but works) fix to remove the trailing empty cells from the UITableView - http://stackoverflow.com/questions/28708574/how-to-remove-extra-empty-cells-in-tableviewcontroller-ios-swift
+//        tableView.tableFooterView = UIView()
+//        
 
     }
     
