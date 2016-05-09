@@ -30,8 +30,8 @@ class ActivityViewController: UIViewController {
 
     func dismissActivity() {
         self.dismissViewControllerAnimated(false, completion: nil)
-        activityView.activityIndicatorView.stopAnimating()
-        activityView.activityIndicatorView.hidden = true
+//        activityView.activityIndicatorView.stopAnimating()
+//        activityView.activityIndicatorView.hidden = true
     }
 
 }

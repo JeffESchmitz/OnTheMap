@@ -16,10 +16,16 @@ class StudentInformationService {
     
     var studentPosts = [StudentInformation]()
     
-//    func addInformationFromData(studentInformation: [NSDictionary]) {
-//        
-//    }
-//    
+    func addStudentsFromData(studentInfoDictionaries: [NSDictionary]) {
+        
+        for studentInfoDictionary in studentInfoDictionaries {
+            if let dictionary = studentInfoDictionary as? [String:AnyObject] {
+                let studentInfo = StudentInformation(dictionary: dictionary)
+                studentPosts.append(studentInfo)
+            }
+        }
+    }
+//
 //    func removeAll() {
 //        studentPosts.removeAll()
 //    }

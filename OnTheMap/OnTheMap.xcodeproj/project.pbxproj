@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		957971E41CDFCA79006F498F /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957971E31CDFCA79006F498F /* StudentTableViewCell.swift */; };
 		958E38471CD4FC2C00520BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38461CD4FC2C00520BCC /* AppDelegate.swift */; };
 		958E384C1CD4FC2C00520BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958E384A1CD4FC2C00520BCC /* Main.storyboard */; };
 		958E384E1CD4FC2C00520BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958E384D1CD4FC2C00520BCC /* Assets.xcassets */; };
@@ -28,6 +29,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		957971E31CDFCA79006F498F /* StudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
 		958E38431CD4FC2C00520BCC /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		958E38461CD4FC2C00520BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		958E384B1CD4FC2C00520BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				958E384A1CD4FC2C00520BCC /* Main.storyboard */,
 				958E384F1CD4FC2C00520BCC /* LaunchScreen.storyboard */,
 				F0F0D2B0933E49B3A3F292EB /* ActivityViewController.swift */,
+				957971E31CDFCA79006F498F /* StudentTableViewCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -221,6 +224,7 @@
 				958E38771CD7746100520BCC /* UserLogin.swift in Sources */,
 				958E386B1CD52C0100520BCC /* Constants.swift in Sources */,
 				F0F0D2C4026AB7476567422A /* ActivityViewController.swift in Sources */,
+				957971E41CDFCA79006F498F /* StudentTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

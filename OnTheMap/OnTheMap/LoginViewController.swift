@@ -25,11 +25,15 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    }
+    
+    override func viewWillAppear(animated: Bool) {
         // just for debugging
         if _isDebugAssertConfiguration() {
             emailTextField.text = "jeffeschmitz@gmail.com"
             passwordTextField.text = "PZ2-Lo2-mTA-KcE"
         }
+
     }
     
     @IBAction func udacityLoginButtonTapped(sender: AnyObject) {
@@ -56,7 +60,7 @@ class LoginViewController: UIViewController {
                 } else {
                     self.activityViewController.dismissActivity()
                     print("error: \(error)")
-                    self.displayError(error)
+                    self.showAlert(error)
                 }
             })
         }
@@ -84,14 +88,6 @@ class LoginViewController: UIViewController {
         })
     }
     
-    private func displayError(message: String! = "") {
-        dispatch_async(dispatch_get_main_queue()) { 
-            let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-        }
-    }
-
 }
 
 extension LoginViewController: UITextFieldDelegate {
@@ -109,7 +105,7 @@ extension LoginViewController: UITextFieldDelegate {
 //TODO: JES - 5.1.2016 - Move out to new class file, after login is working.
 extension UIViewController {
     
-    func showAlert(message: String = "") {
+    func showAlert(message: String! = "") {
         let alertController = UIAlertController(title: "", message: message, preferredStyle: .Alert)
         let action = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
         alertController.addAction(action)

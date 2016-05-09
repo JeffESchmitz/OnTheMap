@@ -21,8 +21,8 @@ extension Client {
         taskForPOSTMethod(url, jsonBody: jsonBody) { (result, error) in
             //TODO: JES - 5.1.2016 - refactor below out to common method for FaceBook login to use also
 
-            if error != nil {
-                completionHandler(result: false, error: error?.valueForKeyPath("userInfo.NSLocalizedDescription") as? String)
+            if let error = error {
+                completionHandler(result: false, error: error.valueForKeyPath("userInfo.NSLocalizedDescription") as? String)
             }
             else {
                 guard let account = result[Constants.UdacityAPI.Account] as? [String:AnyObject] else {

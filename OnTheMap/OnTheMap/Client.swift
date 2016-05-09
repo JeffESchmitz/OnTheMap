@@ -78,8 +78,11 @@ class Client {
         task.resume()
     }
     
-    func taskForGETMethod(urlString: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
-        
+//    func taskForGETMethod(urlString: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+    func taskForGETMethod(urlString: String,
+                          requestHeaders: [String:String]? = nil,
+                          completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
+    
         func sendError(error: String) {
             print(error)
             let userInfo = [NSLocalizedDescriptionKey : error]
@@ -92,6 +95,11 @@ class Client {
             return
         }
         let request = NSMutableURLRequest(URL: url)
+        if let headers = requestHeaders {
+            for (key, value) in headers {
+                request.addValue(value, forHTTPHeaderField: key)
+            }
+        }
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
 
