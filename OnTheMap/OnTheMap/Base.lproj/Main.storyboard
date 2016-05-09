@@ -202,6 +202,11 @@
                                 <action selector="logoutButtonTouched:" destination="Qp2-v8-zIm" id="lwh-8k-TWR"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="aSr-J2-SKC">
+                            <connections>
+                                <action selector="refreshButtonTouched:" destination="Qp2-v8-zIm" id="rvr-71-3Ba"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="Lhk-sN-lPH">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="49"/>
@@ -210,6 +215,7 @@
                     </tabBar>
                     <connections>
                         <outlet property="logoutButton" destination="gRd-b5-jQf" id="nAe-Kv-9M5"/>
+                        <outlet property="refreshButton" destination="aSr-J2-SKC" id="fUU-Dq-JPY"/>
                         <segue destination="xtp-si-eis" kind="relationship" relationship="viewControllers" id="k2u-8L-1uB"/>
                         <segue destination="BPY-zC-RPy" kind="relationship" relationship="viewControllers" id="Emc-Ru-6xD"/>
                     </connections>
