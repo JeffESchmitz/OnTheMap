@@ -31,8 +31,6 @@ class LocationsTableViewController: UIViewController {
     
 
     func refreshTable() {
-        print("refreshTable not implemented yet...")
-        // add code to refresh the tableView on this ViewController using GCD.
         Client.sharedInstance.getStudentLocations { (result, error) in
             dispatch_async(dispatch_get_main_queue(), {
                 if let status = result as? Bool where status {
