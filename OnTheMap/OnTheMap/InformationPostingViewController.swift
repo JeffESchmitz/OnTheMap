@@ -17,4 +17,8 @@ class InformationPostingViewController: UIViewController {
     }
     
     
+    @IBAction func cancel(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
 }
