@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		957971E41CDFCA79006F498F /* StudentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 957971E31CDFCA79006F498F /* StudentTableViewCell.swift */; };
+		9587996E1CE268E100B35152 /* LoadingOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9587996D1CE268E100B35152 /* LoadingOverlay.swift */; };
 		958E38471CD4FC2C00520BCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 958E38461CD4FC2C00520BCC /* AppDelegate.swift */; };
 		958E384C1CD4FC2C00520BCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 958E384A1CD4FC2C00520BCC /* Main.storyboard */; };
 		958E384E1CD4FC2C00520BCC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 958E384D1CD4FC2C00520BCC /* Assets.xcassets */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		957971E31CDFCA79006F498F /* StudentTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentTableViewCell.swift; sourceTree = "<group>"; };
+		9587996D1CE268E100B35152 /* LoadingOverlay.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingOverlay.swift; sourceTree = "<group>"; };
 		958E38431CD4FC2C00520BCC /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		958E38461CD4FC2C00520BCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		958E384B1CD4FC2C00520BCC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -112,6 +114,7 @@
 				958E384F1CD4FC2C00520BCC /* LaunchScreen.storyboard */,
 				F0F0D2B0933E49B3A3F292EB /* ActivityViewController.swift */,
 				957971E31CDFCA79006F498F /* StudentTableViewCell.swift */,
+				9587996D1CE268E100B35152 /* LoadingOverlay.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -218,6 +221,7 @@
 				958E38691CD5290800520BCC /* ClientConstants.swift in Sources */,
 				958E38631CD5260900520BCC /* Client.swift in Sources */,
 				958E38471CD4FC2C00520BCC /* AppDelegate.swift in Sources */,
+				9587996E1CE268E100B35152 /* LoadingOverlay.swift in Sources */,
 				958E38731CD535AD00520BCC /* LocationsTableViewController.swift in Sources */,
 				958E38711CD531F100520BCC /* LocationsMapViewController.swift in Sources */,
 				958E386F1CD5319A00520BCC /* TabBarController.swift in Sources */,
