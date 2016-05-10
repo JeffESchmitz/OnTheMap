@@ -28,8 +28,6 @@ class LocationsTableViewController: UIViewController {
         refreshTable()
     }
     
-    
-
     func refreshTable() {
         Client.sharedInstance.getStudentLocations { (result, error) in
             dispatch_async(dispatch_get_main_queue(), {
