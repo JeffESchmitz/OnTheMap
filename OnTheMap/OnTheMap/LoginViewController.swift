@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-    private let activityViewController = ActivityViewController()
+//    private let activityViewController = ActivityViewController()
     
     @IBOutlet weak var emailTextField: UITextField! {
         didSet { emailTextField.delegate = self }
@@ -49,8 +49,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        activityViewController.displayMessage = "Connecting..."
-        presentViewController(activityViewController, animated: true, completion: nil)
+        LoadingOverlay.shared.showOverlay(self.view, message: "Connecting...")
         
         Client.sharedInstance.userLogin.loginType = LoginType.Udacity
         Client.sharedInstance.udacityLogin(userName, password: password) { (result, error) in
@@ -58,7 +57,7 @@ class LoginViewController: UIViewController {
                 if let status = result as? Bool where status {
                     self.completeLogin()
                 } else {
-                    self.activityViewController.dismissActivity()
+                    LoadingOverlay.shared.hideOverlayView()
                     print("error: \(error)")
                     self.showAlert(error)
                 }
@@ -80,7 +79,7 @@ class LoginViewController: UIViewController {
             self.emailTextField.text = ""
             self.passwordTextField.text = ""
 
-            self.activityViewController.dismissActivity()
+            LoadingOverlay.shared.hideOverlayView()
 
             // Navigate to the TabBarController
             let tabBarController = self.storyboard?.instantiateViewControllerWithIdentifier("RootNavigationController") as! UINavigationController

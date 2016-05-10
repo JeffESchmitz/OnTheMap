@@ -17,7 +17,7 @@ class InformationPostingViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var whereStudyingLabel: UILabel!
     
-    var activityViewController = ActivityViewController()
+//    var activityViewController = ActivityViewController()
     private var coordinate: CLLocationCoordinate2D?
     
     
@@ -28,31 +28,29 @@ class InformationPostingViewController: UIViewController {
     }
     
     @IBAction func findButtonTouched(sender: AnyObject) {
-//        findFunctionVersion1()
+        findFunctionVersion1()
         
-        findFunctionVersion2()
+//        findFunctionVersion2()
     }
     
     func findFunctionVersion2() {
         
         // check if the location to be searched is empty or not
         guard !locationTextField.text!.isEmpty else {
-            showAlertWith("Please enter some location")
+            showAlert("Please enter some location")
             return
         }
         
-//        activityViewController.displayMessage = "Locating..."
-//        presentViewController(activityViewController, animated: true, completion: nil)
-        LoadingOverlay.shared.showOverlay(self.view)
+        LoadingOverlay.shared.showOverlay(self.view, message: "Locating...")
         
         let geocoder = CLGeocoder()
         
         geocoder.geocodeAddressString(locationTextField.text!) { (placemarks, error) in
-//            self.activityViewController.dismissActivity()
+            
             LoadingOverlay.shared.hideOverlayView()
             
             if error != nil {
-                self.showAlertWith(error?.description)
+                self.showAlert(error?.description)
                 
             } else {
                 
@@ -70,7 +68,6 @@ class InformationPostingViewController: UIViewController {
                     self.mapView.setRegion(coordinateRegion, animated: true)
                     
                     // Hide/Show UI elements
-                    self.activityViewController.dismissActivity()
                     self.whereStudyingLabel.text = "Add a URL to your post"
                     self.locationTextField.hidden = true
                     self.findOnMapButton.hidden = true
@@ -78,71 +75,34 @@ class InformationPostingViewController: UIViewController {
                     self.urlTextField.enabled = true
                     
                 } else {
-                    self.showAlertWith("Failed to find location")
+                    self.showAlert("Failed to find location")
                 }
             }
         }
 
     }
     
-    // show alert with custom message
-    private func showAlertWith(message: String!) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Default, handler: nil))
-        presentViewController(alert, animated: true, completion: nil)
-    }
-
     func findFunctionVersion1() {
-        //        activityViewController.displayMessage = "Locating..."
-        //        presentViewController(activityViewController, animated: true, completion: nil)
-        //
-        //        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
-        //        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-        //            // do some task
-        //            sleep(2)
-        //
-        //            dispatch_async(dispatch_get_main_queue()) {
-        //                // update some UI
-        //                self.activityViewController.dismissActivity()
-        //
-        //                self.whereStudyingLabel.text = "Add a URL to your post"
-        //                self.locationTextField.hidden = true
-        //                self.locationTextField.enabled = false
-        //                self.urlTextField.hidden = false
-        //                self.urlTextField.enabled = true
-        //            }
-        //        }
-        
-        //        guard whereStudyingLabel.text!.isEmpty else {
-        //            self.showAlert("Please enter a location")
-        //            return
-        //        }
-        
         guard let whereabouts = locationTextField.text
             where !whereabouts.isEmpty else {
-                self.showAlertWith("Please enter a location")
+                self.showAlert("Please enter a location")
                 return
         }
         
-        activityViewController.displayMessage = "Locating ..."
-        presentViewController(activityViewController, animated: true, completion: nil)
+        LoadingOverlay.shared.showOverlay(self.view, message: "Locating...")
         
         CLGeocoder().geocodeAddressString(whereabouts) { (placemarks, error) in
-            self.activityViewController.dismissActivity()
+            
+            LoadingOverlay.shared.hideOverlayView()
             
             guard error == nil else {
-                //                dispatch_async(dispatch_get_main_queue(), {
-                self.showAlertWith("Geocoding the map failed")
-                //                })
+                self.showAlert("Geocoding the map failed")
                 return
             }
             
-            
             guard let placemarks = placemarks else {
-                //                dispatch_async(dispatch_get_main_queue(), {
-                self.activityViewController.dismissActivity()
-                self.showAlertWith("Dude, no map placements were returned...")
-                //                })
+                LoadingOverlay.shared.hideOverlayView()
+                self.showAlert("Dude, no map placements were returned...")
                 return
             }
             
@@ -154,10 +114,8 @@ class InformationPostingViewController: UIViewController {
             
             // center the map
             guard let unwrappedCoordinate = self.coordinate else {
-                //                dispatch_async(dispatch_get_main_queue(), {
-                self.activityViewController.dismissActivity()
-                self.showAlertWith("Failed to retrieve coordinates")
-                //                })
+                LoadingOverlay.shared.hideOverlayView()
+                self.showAlert("Failed to retrieve coordinates")
                 return
             }
             
@@ -169,7 +127,6 @@ class InformationPostingViewController: UIViewController {
             self.mapView.setRegion(region, animated: true)
             
             // Hide/Show UI elements
-            self.activityViewController.dismissActivity()
             self.whereStudyingLabel.text = "Add a URL to your post"
             self.locationTextField.hidden = true
             self.findOnMapButton.hidden = true
