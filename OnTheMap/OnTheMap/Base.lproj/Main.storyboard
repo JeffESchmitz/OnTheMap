@@ -268,7 +268,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSV-GA-nGt">
                                 <rect key="frame" x="538" y="28" width="50" height="30"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="50" id="Vqm-ua-CJ0"/>
+                                    <constraint firstAttribute="width" constant="50" id="DzS-gd-Otw"/>
                                 </constraints>
                                 <state key="normal" title="Cancel"/>
                                 <userDefinedRuntimeAttributes>
@@ -280,53 +280,74 @@
                                     <action selector="cancel:" destination="Xxu-tJ-tJO" eventType="touchUpInside" id="NiH-BZ-blH"/>
                                 </connections>
                             </button>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Where are you studying today?" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="alt-dP-Cxj">
-                                <rect key="frame" x="195" y="28" width="211" height="83"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="83" id="gS4-ch-xgL"/>
-                                    <constraint firstAttribute="width" constant="211" id="kKR-XR-u1f"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FdB-no-dmy">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Chicago, IL" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FdB-no-dmy" userLabel="Location Text Field">
                                 <rect key="frame" x="20" y="119" width="560" height="32"/>
-                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="0.50164663461538461" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="32" id="InF-Wa-J7D"/>
+                                    <constraint firstAttribute="height" constant="32" id="Hxh-po-0py"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ORH-oZ-cx9">
                                 <rect key="frame" x="213" y="540" width="174" height="40"/>
-                                <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.4977764423076923" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="174" id="76V-cy-Zfr"/>
-                                    <constraint firstAttribute="height" constant="40" id="xk3-nl-BWl"/>
+                                    <constraint firstAttribute="width" constant="174" id="fT6-at-i3Q"/>
+                                    <constraint firstAttribute="height" constant="40" id="rXR-Ly-ZhX"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
                                 <state key="normal" title="Find on the Map"/>
+                                <connections>
+                                    <action selector="findButtonTouched:" destination="Xxu-tJ-tJO" eventType="touchUpInside" id="fCJ-0i-4EJ"/>
+                                </connections>
                             </button>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="https://www.udacity.com" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ILJ-ut-9lq" userLabel="URL Text Field">
+                                <rect key="frame" x="20" y="119" width="560" height="32"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ln9-ek-zaa" userLabel="Where Studying Label">
+                                <rect key="frame" x="195" y="20" width="210" height="83"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="210" id="iQH-pK-ZhI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="28"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="FdB-no-dmy" firstAttribute="leading" secondItem="LX2-ik-HQC" secondAttribute="leadingMargin" id="0OL-tv-vOp"/>
-                            <constraint firstItem="eSV-GA-nGt" firstAttribute="top" secondItem="7cu-eM-QHd" secondAttribute="bottom" constant="8" symbolic="YES" id="2fa-pU-5k1"/>
-                            <constraint firstItem="HHP-sK-6lX" firstAttribute="bottom" secondItem="Zsx-NT-Rhr" secondAttribute="top" id="31L-Fk-Auj"/>
-                            <constraint firstItem="HHP-sK-6lX" firstAttribute="leading" secondItem="LX2-ik-HQC" secondAttribute="leading" id="EWp-zR-72p"/>
-                            <constraint firstItem="alt-dP-Cxj" firstAttribute="centerX" secondItem="HHP-sK-6lX" secondAttribute="centerX" id="HgB-Nn-eBG"/>
-                            <constraint firstItem="FdB-no-dmy" firstAttribute="trailing" secondItem="LX2-ik-HQC" secondAttribute="trailingMargin" id="Kud-xD-g4l"/>
-                            <constraint firstItem="FdB-no-dmy" firstAttribute="top" secondItem="alt-dP-Cxj" secondAttribute="bottom" constant="8" id="L8G-2E-iyj"/>
-                            <constraint firstItem="ORH-oZ-cx9" firstAttribute="centerX" secondItem="FdB-no-dmy" secondAttribute="centerX" id="YSy-UQ-yT7"/>
-                            <constraint firstItem="HHP-sK-6lX" firstAttribute="top" secondItem="LX2-ik-HQC" secondAttribute="top" id="aiY-df-Of5"/>
-                            <constraint firstItem="alt-dP-Cxj" firstAttribute="top" secondItem="eSV-GA-nGt" secondAttribute="top" id="bEC-wl-JfK"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="eSV-GA-nGt" secondAttribute="trailing" constant="-8" id="kd2-uK-NsA"/>
-                            <constraint firstAttribute="bottom" secondItem="ORH-oZ-cx9" secondAttribute="bottom" constant="20" symbolic="YES" id="mB4-Wm-EY8"/>
-                            <constraint firstItem="FdB-no-dmy" firstAttribute="centerX" secondItem="HHP-sK-6lX" secondAttribute="centerX" id="oej-vV-V9t"/>
-                            <constraint firstAttribute="trailing" secondItem="HHP-sK-6lX" secondAttribute="trailing" id="zVG-dg-jWu"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eSV-GA-nGt" secondAttribute="trailing" constant="-8" id="2Az-Kg-ddU"/>
+                            <constraint firstItem="HHP-sK-6lX" firstAttribute="top" secondItem="LX2-ik-HQC" secondAttribute="top" id="3BK-ty-wNM"/>
+                            <constraint firstAttribute="trailing" secondItem="HHP-sK-6lX" secondAttribute="trailing" id="FZL-ux-uoG"/>
+                            <constraint firstItem="ln9-ek-zaa" firstAttribute="centerX" secondItem="ILJ-ut-9lq" secondAttribute="centerX" id="GNU-V6-JL6"/>
+                            <constraint firstItem="FdB-no-dmy" firstAttribute="leading" secondItem="LX2-ik-HQC" secondAttribute="leadingMargin" id="KjL-5y-CP5"/>
+                            <constraint firstItem="ln9-ek-zaa" firstAttribute="centerX" secondItem="HHP-sK-6lX" secondAttribute="centerX" id="Lul-RR-NCM"/>
+                            <constraint firstItem="ln9-ek-zaa" firstAttribute="top" secondItem="7cu-eM-QHd" secondAttribute="bottom" id="NpR-SD-UFE"/>
+                            <constraint firstItem="HHP-sK-6lX" firstAttribute="leading" secondItem="LX2-ik-HQC" secondAttribute="leading" id="Tkg-Em-rOQ"/>
+                            <constraint firstItem="FdB-no-dmy" firstAttribute="top" secondItem="ln9-ek-zaa" secondAttribute="bottom" constant="16" id="Whe-kC-DFI"/>
+                            <constraint firstItem="FdB-no-dmy" firstAttribute="leading" secondItem="ILJ-ut-9lq" secondAttribute="leading" id="XAO-LP-gmC"/>
+                            <constraint firstItem="ILJ-ut-9lq" firstAttribute="trailing" secondItem="FdB-no-dmy" secondAttribute="trailing" id="Z11-HR-APW"/>
+                            <constraint firstItem="HHP-sK-6lX" firstAttribute="bottom" secondItem="Zsx-NT-Rhr" secondAttribute="top" id="a4h-yf-7fl"/>
+                            <constraint firstItem="ILJ-ut-9lq" firstAttribute="top" secondItem="eSV-GA-nGt" secondAttribute="bottom" constant="61" id="l18-ao-aWq"/>
+                            <constraint firstItem="FdB-no-dmy" firstAttribute="baseline" secondItem="ILJ-ut-9lq" secondAttribute="baseline" id="oO8-X8-2L2"/>
+                            <constraint firstItem="ILJ-ut-9lq" firstAttribute="top" secondItem="ln9-ek-zaa" secondAttribute="bottom" constant="16" id="oZr-R4-5i8"/>
+                            <constraint firstItem="ILJ-ut-9lq" firstAttribute="centerX" secondItem="ORH-oZ-cx9" secondAttribute="centerX" id="u70-cw-dqv"/>
+                            <constraint firstAttribute="bottom" secondItem="ORH-oZ-cx9" secondAttribute="bottom" constant="20" symbolic="YES" id="ukt-BA-bZA"/>
+                            <constraint firstItem="ILJ-ut-9lq" firstAttribute="bottom" secondItem="FdB-no-dmy" secondAttribute="bottom" id="vhH-t7-eej"/>
+                            <constraint firstItem="ln9-ek-zaa" firstAttribute="top" secondItem="eSV-GA-nGt" secondAttribute="top" constant="-8" id="xc5-Qu-AMA"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="findOnMapButton" destination="ORH-oZ-cx9" id="w2B-GC-mWI"/>
+                        <outlet property="locationTextField" destination="FdB-no-dmy" id="UNi-cx-IYm"/>
+                        <outlet property="mapView" destination="HHP-sK-6lX" id="UUF-Sn-zea"/>
+                        <outlet property="urlTextField" destination="ILJ-ut-9lq" id="lgK-g7-aiG"/>
+                        <outlet property="whereStudyingLabel" destination="ln9-ek-zaa" id="IOv-cw-coz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pXe-w7-YCp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
