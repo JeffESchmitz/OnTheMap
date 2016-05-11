@@ -11,17 +11,7 @@ import UIKit
 class LocationsTableViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
 
-//        // Bit of a hack (but works) fix to remove the trailing empty cells from the UITableView - http://stackoverflow.com/questions/28708574/how-to-remove-extra-empty-cells-in-tableviewcontroller-ios-swift
-//        tableView.tableFooterView = UIView()
-//        
-
-    }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
@@ -57,15 +47,14 @@ extension LocationsTableViewController: UITableViewDelegate, UITableViewDataSour
         let studentInfo = StudentInformationService.sharedInstance.studentPosts[indexPath.row]
         cell.studentNameLabel.text = "\(studentInfo.firstName!) \(studentInfo.lastName!)"
         
-        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let studentInfo = StudentInformationService.sharedInstance.studentPosts[indexPath.row]
         if var mediaUrl = studentInfo.mediaURL {
-            if !mediaUrl.lowercaseString.hasPrefix("http://") {
-                mediaUrl = "http://" + mediaUrl
+            if mediaUrl.lowercaseString.hasPrefix("www.") {
+                mediaUrl = "https://" + mediaUrl
             }
             if let url = NSURL(string: mediaUrl) {
                 UIApplication.sharedApplication().openURL(url)

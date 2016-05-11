@@ -16,73 +16,15 @@ class InformationPostingViewController: UIViewController {
     @IBOutlet weak var findOnMapButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var whereStudyingLabel: UILabel!
+    @IBOutlet weak var submitButton: UIButton!
     
-//    var activityViewController = ActivityViewController()
     private var coordinate: CLLocationCoordinate2D?
     
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        // code here...
-    }
-    
     @IBAction func findButtonTouched(sender: AnyObject) {
-        findFunctionVersion1()
-        
-//        findFunctionVersion2()
+        findFunctionVersion()
     }
     
-    func findFunctionVersion2() {
-        
-        // check if the location to be searched is empty or not
-        guard !locationTextField.text!.isEmpty else {
-            showAlert("Please enter some location")
-            return
-        }
-        
-        LoadingOverlay.shared.showOverlay(self.view, message: "Locating...")
-        
-        let geocoder = CLGeocoder()
-        
-        geocoder.geocodeAddressString(locationTextField.text!) { (placemarks, error) in
-            
-            LoadingOverlay.shared.hideOverlayView()
-            
-            if error != nil {
-                self.showAlert(error?.description)
-                
-            } else {
-                
-                // get the first location of the array
-                if let placemark = placemarks?.first {
-                    
-                    self.coordinate = placemark.location!.coordinate
-                    self.mapView.addAnnotation(MKPlacemark(placemark: placemark))
-                    
-                    // center this position
-                    self.mapView.centerCoordinate = self.coordinate!
-                    
-                    // zoom in the map to focus on the found coordinates
-                    let coordinateRegion = MKCoordinateRegionMakeWithDistance(self.coordinate!, 1000 * 2.0, 1000 * 2.0)
-                    self.mapView.setRegion(coordinateRegion, animated: true)
-                    
-                    // Hide/Show UI elements
-                    self.whereStudyingLabel.text = "Add a URL to your post"
-                    self.locationTextField.hidden = true
-                    self.findOnMapButton.hidden = true
-                    self.urlTextField.hidden = false
-                    self.urlTextField.enabled = true
-                    
-                } else {
-                    self.showAlert("Failed to find location")
-                }
-            }
-        }
-
-    }
-    
-    func findFunctionVersion1() {
+    func findFunctionVersion() {
         guard let whereabouts = locationTextField.text
             where !whereabouts.isEmpty else {
                 self.showAlert("Please enter a location")
@@ -129,15 +71,76 @@ class InformationPostingViewController: UIViewController {
             // Hide/Show UI elements
             self.whereStudyingLabel.text = "Add a URL to your post"
             self.locationTextField.hidden = true
+            
+            self.findOnMapButton.enabled = false
             self.findOnMapButton.hidden = true
+            
             self.urlTextField.hidden = false
             self.urlTextField.enabled = true
             
+            self.submitButton.hidden = false
+            self.submitButton.enabled = true
+
+        }
+    }
+    
+    @IBAction func submitButtonTouched(sender: AnyObject) {
+        print("submitButtonTouched")
+        
+        LoadingOverlay.shared.showOverlay(view, message: "Posting...")
+        
+        let studentInfoDictionary = [
+            Constants.ParseAPI.ObjectId: "",
+            Constants.ParseAPI.UniqueKey: Client.sharedInstance.userLogin.accountKey!,
+            Constants.ParseAPI.FirstName: Client.sharedInstance.userLogin.userFirstName!,
+            Constants.ParseAPI.LastName: Client.sharedInstance.userLogin.userLastName!,
+            Constants.ParseAPI.MapString: locationTextField.text!,
+            Constants.ParseAPI.MediaURL: urlTextField.text!,
+            Constants.ParseAPI.CreatedAt: "",
+            Constants.ParseAPI.UpdatedAt: "",
+            Constants.ParseAPI.Latitude: coordinate!.latitude,
+            Constants.ParseAPI.Longitude: self.coordinate!.longitude
+        ]
+        print("studentInfoDictionary: \(studentInfoDictionary)")
+
+        let studentInformation = StudentInformation(dictionary: studentInfoDictionary as! [String:AnyObject])
+        print("studentInformation: \(studentInformation)")
+
+        Client.sharedInstance.postStudentInformation(studentInformation) { (result, error) in
+
+            dispatch_async(dispatch_get_main_queue(), { 
+                LoadingOverlay.shared.hideOverlayView()
+            })
+            
+            if error != nil {
+                self.showAlert(error!)
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue(), { 
+                    
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                })
+            }
         }
     }
     
     @IBAction func cancel(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
-    
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

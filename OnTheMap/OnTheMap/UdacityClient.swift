@@ -1,4 +1,4 @@
-//
+ //
 //  UdacityClient.swift
 //  OnTheMap
 //
@@ -17,8 +17,13 @@ extension Client {
         print("url: \(url)")
         let jsonBody: [String : AnyObject] = ["udacity" : ["username" : username, "password" : password]]
         print("jsonBody: \(jsonBody)")
-     
-        taskForPOSTMethod(url, jsonBody: jsonBody) { (result, error) in
+        
+        let tuples = [
+            (Constants.HttpRequest.AcceptHeaderField, Constants.HttpRequest.ContentJSON),
+            (Constants.HttpRequest.ContentTypeHeaderField, Constants.HttpRequest.ContentJSON)
+        ]
+        
+        taskForPOSTMethod(url, jsonBody: jsonBody, requestHeaders: tuples) { (result, error) in
             //TODO: JES - 5.1.2016 - refactor below out to common method for FaceBook login to use also
 
             if let error = error {

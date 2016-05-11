@@ -17,11 +17,11 @@ class Client {
     }
     
     var session: NSURLSession
-//    var userLoginType: LoginType?
     var userLogin: UserLogin
     
     func taskForPOSTMethod(urlString: String,
                            jsonBody: [String: AnyObject],
+                           requestHeaders:[(String, String)]? = nil,
                            completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
         guard let url = NSURL(string: urlString) else {
@@ -31,14 +31,21 @@ class Client {
         
         let request = NSMutableURLRequest(URL: url)
         request.HTTPMethod = Constants.HttpRequest.MethodPOST
-        request.addValue(Constants.HttpRequest.ContentJSON, forHTTPHeaderField: Constants.HttpRequest.AcceptHeaderField)
-        request.addValue(Constants.HttpRequest.ContentJSON, forHTTPHeaderField: Constants.HttpRequest.ContentTypeHeaderField)
+        if let headers = requestHeaders {
+            for tuple in headers {
+                request.addValue(tuple.1, forHTTPHeaderField: tuple.0)
+            }
+        }
+        print("allHTTPHeaderFields: \(request.allHTTPHeaderFields)")
+        
         do {
             print("jsonBody: \(jsonBody)")
             let requestBody = try! NSJSONSerialization.dataWithJSONObject(jsonBody, options: .PrettyPrinted)
             print("HTTPBody: '\(requestBody)'")
             request.HTTPBody = requestBody
         }
+        
+        print("allHTTPHeaderFields: \(request.allHTTPHeaderFields)")
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             
@@ -78,7 +85,6 @@ class Client {
         task.resume()
     }
     
-//    func taskForGETMethod(urlString: String, completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
     func taskForGETMethod(urlString: String,
                           requestHeaders: [String:String]? = nil,
                           completionHandler: (result: AnyObject!, error: NSError?) -> Void) {

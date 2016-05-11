@@ -13,7 +13,6 @@ class TabBarController: UITabBarController {
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBOutlet weak var refreshButton: UIBarButtonItem!
     
-    
     @IBAction func logoutButtonTouched(sender: AnyObject) {
         logoutButton.enabled = false
         
@@ -38,7 +37,6 @@ class TabBarController: UITabBarController {
             }
         }
     }
-    
     
     @IBAction func refreshButtonTouched(sender: AnyObject) {
         Client.sharedInstance.getStudentLocations { (result, error) in

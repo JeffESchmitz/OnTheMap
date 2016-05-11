@@ -21,11 +21,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var udacityLoginButton: UIButton!
     @IBOutlet weak var accountSignUpButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-    }
+
     
     override func viewWillAppear(animated: Bool) {
         // just for debugging

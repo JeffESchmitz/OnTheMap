@@ -306,7 +306,7 @@
                                 <rect key="frame" x="20" y="119" width="560" height="32"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="22"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="URL"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Where are you studying today?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ln9-ek-zaa" userLabel="Where Studying Label">
                                 <rect key="frame" x="195" y="20" width="210" height="83"/>
@@ -317,6 +317,19 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cQn-jM-y3d">
+                                <rect key="frame" x="213" y="540" width="174" height="40"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="0.49777644230000001" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="174" id="bmB-Ya-jVS"/>
+                                    <constraint firstAttribute="height" constant="40" id="uAa-Uk-jR8"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="20"/>
+                                <state key="normal" title="Submit"/>
+                                <connections>
+                                    <action selector="submitButtonTouched:" destination="Xxu-tJ-tJO" eventType="touchUpInside" id="Gf3-8x-Cvp"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -327,6 +340,7 @@
                             <constraint firstItem="FdB-no-dmy" firstAttribute="leading" secondItem="LX2-ik-HQC" secondAttribute="leadingMargin" id="KjL-5y-CP5"/>
                             <constraint firstItem="ln9-ek-zaa" firstAttribute="centerX" secondItem="HHP-sK-6lX" secondAttribute="centerX" id="Lul-RR-NCM"/>
                             <constraint firstItem="ln9-ek-zaa" firstAttribute="top" secondItem="7cu-eM-QHd" secondAttribute="bottom" id="NpR-SD-UFE"/>
+                            <constraint firstItem="cQn-jM-y3d" firstAttribute="baseline" secondItem="ORH-oZ-cx9" secondAttribute="baseline" id="OpJ-YJ-R56"/>
                             <constraint firstItem="HHP-sK-6lX" firstAttribute="leading" secondItem="LX2-ik-HQC" secondAttribute="leading" id="Tkg-Em-rOQ"/>
                             <constraint firstItem="FdB-no-dmy" firstAttribute="top" secondItem="ln9-ek-zaa" secondAttribute="bottom" constant="16" id="Whe-kC-DFI"/>
                             <constraint firstItem="FdB-no-dmy" firstAttribute="leading" secondItem="ILJ-ut-9lq" secondAttribute="leading" id="XAO-LP-gmC"/>
@@ -339,12 +353,14 @@
                             <constraint firstAttribute="bottom" secondItem="ORH-oZ-cx9" secondAttribute="bottom" constant="20" symbolic="YES" id="ukt-BA-bZA"/>
                             <constraint firstItem="ILJ-ut-9lq" firstAttribute="bottom" secondItem="FdB-no-dmy" secondAttribute="bottom" id="vhH-t7-eej"/>
                             <constraint firstItem="ln9-ek-zaa" firstAttribute="top" secondItem="eSV-GA-nGt" secondAttribute="top" constant="-8" id="xc5-Qu-AMA"/>
+                            <constraint firstItem="cQn-jM-y3d" firstAttribute="leading" secondItem="ORH-oZ-cx9" secondAttribute="leading" id="yH7-k6-q1S"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="findOnMapButton" destination="ORH-oZ-cx9" id="w2B-GC-mWI"/>
                         <outlet property="locationTextField" destination="FdB-no-dmy" id="UNi-cx-IYm"/>
                         <outlet property="mapView" destination="HHP-sK-6lX" id="UUF-Sn-zea"/>
+                        <outlet property="submitButton" destination="cQn-jM-y3d" id="yOj-1R-75N"/>
                         <outlet property="urlTextField" destination="ILJ-ut-9lq" id="lgK-g7-aiG"/>
                         <outlet property="whereStudyingLabel" destination="ln9-ek-zaa" id="IOv-cw-coz"/>
                     </connections>

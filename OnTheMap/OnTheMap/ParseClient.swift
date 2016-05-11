@@ -43,6 +43,54 @@ extension Client {
         }
     }
     
+    func postStudentInformation(studentInformation: StudentInformation, completionHandler: (result: AnyObject!, error: String?) -> Void) {
+        
+        let urlString = Constants.ParseAPI.BaseUrl + Constants.ParseAPI.GetStudentLocationsMethod
+        print("urlString: \(urlString)")
+        
+        let jsonBody: [String : AnyObject] = [
+            "uniqueKey": studentInformation.uniqueKey!,
+            "firstName": studentInformation.firstName!,
+            "lastName": studentInformation.lastName!,
+            "mapString": studentInformation.mapString!,
+            "mediaURL": studentInformation.mediaURL!,
+            "latitude": studentInformation.latitude!,
+            "longitude": studentInformation.longitude!
+        ]
+        print("jsonBody: \(jsonBody)")
+        
+        let requestHeaders = [
+            (Constants.ParseAPI.HeaderAppId, Constants.ParseAPI.ApplicationId),
+            (Constants.ParseAPI.HeaderAPIKey, Constants.ParseAPI.RESTAPIKey)
+            ,(Constants.HttpRequest.ContentTypeHeaderField, Constants.HttpRequest.ContentJSON)
+        ]
+        print("requestHeaders: \(requestHeaders)")
+
+        taskForPOSTMethod(urlString, jsonBody: jsonBody, requestHeaders: requestHeaders) { (result, error) in
+            if let error = error {
+                print("error: \(error)")
+                completionHandler(result: false, error: error.valueForKeyPath("userInfo.NSLocalizedDescription") as? String)
+            }
+            else {
+                guard let json = result as? [String:AnyObject] else {
+                    completionHandler(result: false, error: "POST for StudentInfo empty or nil")
+                    return
+                }
+                guard let _ = json[Constants.ParseAPI.CreatedAt] as? String else {
+                    completionHandler(result: false, error: "Failed to post student location!")
+                    return
+                }
+                guard let _ = json[Constants.ParseAPI.ObjectId] as? String else {
+                    completionHandler(result: false, error: "Failed to post student location!")
+                    return
+                }
+                
+                // signal back that POST succeeded
+                completionHandler(result: true, error: nil)
+            }
+        }
+        
+    }
     
     func converParametersDictionaryToString(parameters: [String: AnyObject]) -> String {
         var result = ""

@@ -24,10 +24,5 @@ class StudentInformationService {
                 studentPosts.append(studentInfo)
             }
         }
-    }
-//
-//    func removeAll() {
-//        studentPosts.removeAll()
-//    }
-    
+    }    
 }
