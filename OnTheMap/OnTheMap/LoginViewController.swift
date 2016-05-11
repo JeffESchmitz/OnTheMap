@@ -10,8 +10,6 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
-//    private let activityViewController = ActivityViewController()
-    
     @IBOutlet weak var emailTextField: UITextField! {
         didSet { emailTextField.delegate = self }
     }
