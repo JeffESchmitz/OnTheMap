@@ -24,8 +24,14 @@ class Client {
                            requestHeaders:[(String, String)]? = nil,
                            completionHandler: (result: AnyObject!, error: NSError?) -> Void) {
         
+        func sendError(error: String) {
+            print(error)
+            let userInfo = [NSLocalizedDescriptionKey : error]
+            completionHandler(result: nil, error: NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
+        }
+        
         guard let url = NSURL(string: urlString) else {
-            print("url failed to initialize with '\(urlString)'")
+            sendError("URL failed to initialize with '\(urlString)'")
             return
         }
         
@@ -49,15 +55,9 @@ class Client {
         
         let task = session.dataTaskWithRequest(request) { (data, response, error) in
             
-            func sendError(error: String) {
-                print(error)
-                let userInfo = [NSLocalizedDescriptionKey : error]
-                completionHandler(result: nil, error: NSError(domain: "taskForPOSTMethod", code: 1, userInfo: userInfo))
-            }
-            
             // Check for any errors
             guard (error == nil) else {
-                sendError("There was an error with your request: \(error)")
+                completionHandler(result: false, error: error)
                 return
             }
             
@@ -111,7 +111,7 @@ class Client {
 
             // Check for any errors
             guard error == nil else {
-                sendError("Error submitting request to the server. request: '\(request)'")
+                completionHandler(result: false, error: error)
                 return
             }
             
@@ -174,7 +174,7 @@ class Client {
             
             // Check for any errors
             guard error == nil else {
-                sendError("Error submitting request to the server. request: '\(request)'")
+                completionHandler(result: false, error: error)
                 return
             }
             

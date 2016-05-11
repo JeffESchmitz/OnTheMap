@@ -27,7 +27,7 @@ extension Client {
             //TODO: JES - 5.1.2016 - refactor below out to common method for FaceBook login to use also
 
             if let error = error {
-                completionHandler(result: false, error: error.valueForKeyPath("userInfo.NSLocalizedDescription") as? String)
+                completionHandler(result: false, error: error.localizedDescription)
             }
             else {
                 guard let account = result[Constants.UdacityAPI.Account] as? [String:AnyObject] else {
