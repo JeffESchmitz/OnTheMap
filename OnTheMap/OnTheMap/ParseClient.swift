@@ -35,6 +35,7 @@ extension Client {
                     completionHandler(result: false, error: "Student results nil or empty")
                     return
                 }
+                StudentInformationService.sharedInstance.studentPosts.removeAll()
                 StudentInformationService.sharedInstance.addStudentsFromData(results)
                 
                 // signal back to caller that all is good!

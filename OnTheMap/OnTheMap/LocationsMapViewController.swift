@@ -25,6 +25,25 @@ class LocationsMapViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
 
+        getStudentLocations()
+    }
+    
+    func refreshMap() -> Void {
+        if let annotations = self.annotations {
+            dispatch_async(dispatch_get_main_queue()) {
+                self.mapView.removeAnnotations(annotations)
+                
+                if self.annotations?.count > 0 {
+                    self.annotations?.removeAll()
+                }
+                self.getAnnotations()
+                
+                self.mapView.addAnnotations(self.annotations!)
+            }
+        }
+    }
+    
+    func getStudentLocations() {
         Client.sharedInstance.getStudentLocations { (result, error) in
             
             dispatch_async(dispatch_get_main_queue(), {
@@ -37,17 +56,6 @@ class LocationsMapViewController: UIViewController {
                     })
                 }
             })
-        }
-    }
-    
-    func refreshMap() -> Void {
-        
-        getAnnotations()
-
-        if let annotations = self.annotations {
-            dispatch_async(dispatch_get_main_queue()) {
-                self.mapView.addAnnotations(annotations)
-            }
         }
     }
 
