@@ -60,12 +60,18 @@ class Client {
                 completionHandler(result: false, error: error)
                 return
             }
-            
+    
             // Successful 2XX response?
             guard let statusCode = (response as? NSHTTPURLResponse)?.statusCode where statusCode >= 200 && statusCode <= 299 else {
+                // Check for incorrect credentials/authorization problem - 403?
+                if (response as? NSHTTPURLResponse)?.statusCode == 403 {
+                    sendError("Invalid email or password.")
+                    return
+                }
                 sendError("Your request returned a status code other than 2xx!")
                 return
             }
+
             
             // Any data returned?
             guard let data = data else {
