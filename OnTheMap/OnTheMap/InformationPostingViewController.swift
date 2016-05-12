@@ -112,16 +112,15 @@ class InformationPostingViewController: UIViewController {
 
         Client.sharedInstance.postStudentInformation(studentInformation) { (result, error) in
 
-            dispatch_async(dispatch_get_main_queue(), { 
-                LoadingOverlay.shared.hideOverlayView()
-            })
             
             if error != nil {
-                self.showAlert(error!)
+                dispatch_async(dispatch_get_main_queue(), {
+                    LoadingOverlay.shared.hideOverlayView()
+                    self.showAlert(error!)
+                })
             }
             else {
                 dispatch_async(dispatch_get_main_queue(), { 
-                    
                     self.dismissViewControllerAnimated(true, completion: nil)
                 })
             }
