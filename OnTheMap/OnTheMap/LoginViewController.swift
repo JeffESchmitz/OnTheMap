@@ -20,6 +20,14 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var accountSignUpButton: UIButton!
     @IBOutlet weak var facebookLoginButton: UIButton!
     
+    override func viewWillAppear(animated: Bool) {
+        // just for debugging
+        if _isDebugAssertConfiguration() {
+            emailTextField.text = "jeffeschmitz@gmail.com"
+            passwordTextField.text = "PZ2-Lo2-mTA-KcE"
+        }
+    }
+    
     @IBAction func udacityLoginButtonTapped(sender: AnyObject) {
         guard !emailTextField.text!.isEmpty,
             let userName = emailTextField.text else {

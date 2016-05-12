@@ -11,8 +11,12 @@ import MapKit
 
 class InformationPostingViewController: UIViewController {
 
-    @IBOutlet weak var locationTextField: UITextField!
-    @IBOutlet weak var urlTextField: UITextField!
+    @IBOutlet weak var locationTextField: UITextField! {
+        didSet { locationTextField.delegate = self }
+    }
+    @IBOutlet weak var urlTextField: UITextField! {
+        didSet { urlTextField.delegate = self }
+    }
     @IBOutlet weak var findOnMapButton: UIButton!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var whereStudyingLabel: UILabel!
@@ -129,18 +133,14 @@ class InformationPostingViewController: UIViewController {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+extension InformationPostingViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        view.endEditing(true)
+    }
+}
