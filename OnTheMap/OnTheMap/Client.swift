@@ -14,10 +14,14 @@ class Client {
     private init(){
         session = NSURLSession.sharedSession()
         userLogin = UserLogin()
+        facebookManager = FBSDKLoginManager()
     }
     
     var session: NSURLSession
     var userLogin: UserLogin
+    
+    // The Facebook manager used in login/logout
+    let facebookManager: FBSDKLoginManager?
     
     func taskForPOSTMethod(urlString: String,
                            jsonBody: [String: AnyObject],

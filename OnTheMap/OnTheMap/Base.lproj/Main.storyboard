@@ -30,6 +30,9 @@
                                 <state key="normal" title="Sign in with facebook">
                                     <color key="titleColor" red="0.96862745098039216" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="facebookLoginButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SIN-j8-gnG"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vOT-vX-uqT">
                                 <rect key="frame" x="175" y="160" width="250" height="280"/>

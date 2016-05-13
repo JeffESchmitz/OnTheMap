@@ -25,37 +25,8 @@ extension Client {
         
         taskForPOSTMethod(url, jsonBody: jsonBody, requestHeaders: tuples) { (result, error) in
             //TODO: JES - 5.1.2016 - refactor below out to common method for FaceBook login to use also
-
-            if let error = error {
-                completionHandler(result: false, error: error.localizedDescription)
-            }
-            else {
-                guard let account = result[Constants.UdacityAPI.Account] as? [String:AnyObject] else {
-                    completionHandler(result: false,
-                                      error: "Login Failed. Unable to find \(Constants.UdacityAPI.Account) in json body.")
-                    return
-                }
-                
-                guard let registered = account[Constants.UdacityAPI.Registered] as? Bool where registered else {
-                    completionHandler(result: false,
-                                      error: "Login Failed. Unable to find \(Constants.UdacityAPI.Registered) in json body.")
-                    return
-                }
-                
-                // store account key for later
-                self.userLogin.accountKey = account[Constants.UdacityAPI.Key] as? String
-                
-                guard let session = result[Constants.UdacityAPI.Session] as? [String:AnyObject] else {
-                    completionHandler(result: false, error: "Login Failed. Unable to find \(Constants.UdacityAPI.Session) in json body.")
-                    return
-                }
-                
-                // store session id for later
-                self.userLogin.sessionId = session[Constants.UdacityAPI.Id] as? String
-                
-                self.getUdacityUserData(completionHandler)
-                
-            }
+            
+            self.processRequestResult(result, error: error, completionHandler: completionHandler)
         }
     }
     
@@ -105,9 +76,65 @@ extension Client {
                     completionHandler(result: true, error: nil)
                 }
             })
+        } else {
+            facebookManager?.logOut()
+            completionHandler(result: true, error: nil)
         }
     }
     
+    func facebookLogin(accessToken: String!, completionHandler: (result: AnyObject!, error: String?) -> Void) {
+        
+        let urlString = Constants.UdacityAPI.BaseUrl + Constants.UdacityAPI.URLPathSeparator + Constants.UdacityAPI.Session
+        print("urlString: \(urlString)")
+        let jsonBody: [String : AnyObject] = ["facebook_mobile" : ["access_token" : accessToken]]
+
+        print("jsonBody: \(jsonBody)")
+        
+        let requestHeaders = [
+            (Constants.HttpRequest.AcceptHeaderField, Constants.HttpRequest.ContentJSON),
+            (Constants.HttpRequest.ContentTypeHeaderField, Constants.HttpRequest.ContentJSON)
+        ]
+        
+        taskForPOSTMethod(urlString, jsonBody: jsonBody, requestHeaders: requestHeaders) {
+            (result, error) in
+            
+            self.processRequestResult(result, error: error, completionHandler: completionHandler)
+        }
+    }
+    
+    func processRequestResult(result: AnyObject!, error: NSError?, completionHandler: (result: AnyObject!, error: String?) -> Void) {
+        
+        if let error = error {
+            completionHandler(result: false, error: error.localizedDescription)
+        }
+        else {
+            guard let account = result[Constants.UdacityAPI.Account] as? [String:AnyObject] else {
+                completionHandler(result: false,
+                                  error: "Login Failed. Unable to find \(Constants.UdacityAPI.Account) in json body.")
+                return
+            }
+            
+            guard let registered = account[Constants.UdacityAPI.Registered] as? Bool where registered else {
+                completionHandler(result: false,
+                                  error: "Login Failed. Unable to find \(Constants.UdacityAPI.Registered) in json body.")
+                return
+            }
+            
+            // store account key for later
+            self.userLogin.accountKey = account[Constants.UdacityAPI.Key] as? String
+            
+            guard let session = result[Constants.UdacityAPI.Session] as? [String:AnyObject] else {
+                completionHandler(result: false, error: "Login Failed. Unable to find \(Constants.UdacityAPI.Session) in json body.")
+                return
+            }
+            
+            // store session id for later
+            self.userLogin.sessionId = session[Constants.UdacityAPI.Id] as? String
+            
+            self.getUdacityUserData(completionHandler)
+            
+        }
+    }
 }
 
 

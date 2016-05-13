@@ -41,7 +41,7 @@ class LoginViewController: UIViewController {
             return
         }
         
-        LoadingOverlay.shared.showOverlay(self.view, message: "Connecting...")
+        LoadingOverlay.shared.showOverlay(self.view, message: "Connecting to Udacity")
         
         Client.sharedInstance.userLogin.loginType = LoginType.Udacity
         Client.sharedInstance.udacityLogin(userName, password: password) { (result, error) in
@@ -55,7 +55,6 @@ class LoginViewController: UIViewController {
                 }
             })
         }
-        
     }
     
     @IBAction func udacitySignUpTapped(sender: AnyObject) {
@@ -63,6 +62,35 @@ class LoginViewController: UIViewController {
         if let url = NSURL(string: urlString) {
             UIApplication.sharedApplication().openURL(url)
         }
+    }
+    
+    @IBAction func facebookLoginButtonTapped(sender: AnyObject) {
+        
+        LoadingOverlay.shared.showOverlay(self.view, message: "Connecting to Facebook")
+        
+        // permissions for Facebook to grant login access
+        let permissions = ["public_profile", "email"]
+        
+        Client.sharedInstance.userLogin.loginType = LoginType.FaceBook
+        Client.sharedInstance.facebookManager?.loginBehavior = FBSDKLoginBehavior.Web
+        Client.sharedInstance.facebookManager?.logInWithReadPermissions(permissions, fromViewController: self, handler: { (result, error) in
+            
+            guard error == nil else {
+                self.showAlert("Unable to login to Facebook")
+                return
+            }
+            
+            // now for the Facebook token
+            if result.token != nil {
+                Client.sharedInstance.facebookLogin(result.token.tokenString!, completionHandler: { (result, error) in
+                    self.completeLogin()
+                })
+            }
+            else {
+                LoadingOverlay.shared.hideOverlayView()
+            }
+        })
+        
     }
     
     private func completeLogin() {
