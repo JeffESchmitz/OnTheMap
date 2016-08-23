@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
         // just for debugging
         if _isDebugAssertConfiguration() {
             emailTextField.text = "jeffeschmitz@gmail.com"
-            passwordTextField.text = "PZ2-Lo2-mTA-KcE"
+            passwordTextField.text = ""
         }
     }
     
